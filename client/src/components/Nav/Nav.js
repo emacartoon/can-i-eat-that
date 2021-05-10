@@ -1,5 +1,4 @@
 import React from "react";
-import { useStoreContext } from "../../utils/GlobalState";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../config/firebase";
 import { Link } from "react-router-dom";
@@ -9,30 +8,31 @@ function Nav() {
   const [user] = useAuthState(auth);
 
   return (
-    <nav className="navbar">
-      <h1 className="eat" href="/">
-        Can I Eat That?
-      </h1>
+    <div>
+      <header className="navbar">
+        <div className="align-center">
+          <a href="/">
+            <img
+              src="./imgs/Can_I_Eat_That_logo.png"
+              className="logo"
+              alt="Can I Eat That?"
+            />
+          </a>
+          <h1> Your personal recipe finder</h1>
+        </div>
+      </header>
 
-      <h1 className="your"> Your personal recipe finder</h1>
-
-      <nav className="">
+      <nav className="navbtns navbar align-center">
         <div className="navclick">
           <Link to="/" className="navclick">
             Home
           </Link>
         </div>
-      </nav>
-
-      <nav className="">
         <div className="navclick">
           <Link to="/FavoritesList" className="navclick">
             Favorites
           </Link>
-          <div></div>
         </div>
-      </nav>
-      <nav className="">
         <div className="navclick">
           {auth.currentUser ? (
             <Link>Logout</Link>
@@ -41,13 +41,12 @@ function Nav() {
               Login
             </Link>
           )}
-
-          <div></div>
+        </div>
+        <div>
+          {/* {store.loading ? <a className="navbar-brand ml-auto">Loading...</a> : <></>} */}
         </div>
       </nav>
-
-      {/* {store.loading ? <a className="navbar-brand ml-auto">Loading...</a> : <></>} */}
-    </nav>
+    </div>
   );
 }
 

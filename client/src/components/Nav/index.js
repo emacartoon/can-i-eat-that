@@ -1,24 +1,18 @@
 import React from "react";
-import { useStoreContext } from "../../utils/GlobalState";
+// import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../config/firebase";
 import { Link } from "react-router-dom";
 import "./style.css";
 
-function Nav(props) {
-  const logout = async () => {
-    await fetch("/api/logout", {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      credentials: "include",
-    });
-  };
-  const [store] = useStoreContext();
+function Nav() {
+  // const [user] = useAuthState(auth);
 
   return (
     <div>
       <header className="navbar">
         <div className="align-center">
           <a href="/">
-            <img src="./imgs/Can_I_Eat_That_logo.png" className="logo" />
+            <img src="./imgs/Can_I_Eat_That_logo.png" className="logo" alt="Can I Eat That?" />
           </a>
           <h1> Your personal recipe finder</h1>
         </div>
@@ -36,9 +30,13 @@ function Nav(props) {
           </Link>
         </div>
         <div className="navclick">
-          <Link to="/login-signup" className="navclick">
-            Login
-          </Link>
+        {auth.currentUser ? (
+            <Link>Logout</Link>
+          ) : (
+            <Link to="/login-signup" className="navclick">
+              Login
+            </Link>
+          )}
         </div>
       </nav>
       {/* {store.loading ? <a className="navbar-brand ml-auto">Loading...</a> : <></>} */}

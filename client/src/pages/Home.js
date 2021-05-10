@@ -59,8 +59,6 @@ const Home = (props) => {
   return (
     <Container fluid>
       <div>{props.user ? "Welcome back" : "You are not logged in"}</div>
-      {pagination}
-      {searchTerm}
       <div className="container">
         <div className="halfsies">
           <SearchRecipesForm setSearchTerm={setSearchTerm} />
@@ -71,6 +69,8 @@ const Home = (props) => {
             pagination={pagination}
             setPagination={setPagination}
           />
+      {pagination}
+      {searchTerm}
         </div>
       </div>
     </Container>
